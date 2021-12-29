@@ -1,6 +1,6 @@
 import sys
 
-import sim
+import remoteAPI.sim as sim
 from objectWrappers import Sensor
 
 # simRemoteApi.start(19999)
