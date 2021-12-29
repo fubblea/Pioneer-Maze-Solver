@@ -2,7 +2,7 @@
 
 This project aims to explore various maze solving algorithms through the use CoppeliaSim and Python
 
-![alt text](../media/maze_overview.png)
+![alt text](../Pioneer-Maze-Solver/media/maze_overview.png)
 
 The robot chosen for this project is the Pioneer P3DX. More info can be found here: <https://www.generationrobots.com/media/Pioneer3DX-P3DX-RevA.pdf>.
 
