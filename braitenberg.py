@@ -1,7 +1,4 @@
-import math
-from ntpath import join
 import sys
-import time
 
 import sim
 from objectWrappers import Sensor
@@ -52,7 +49,7 @@ for i in range(1, 17):
     sensorArray.append(sensor)
 
 NODETECTIONDIST = 0.2
-MAXDETECTIONDIST = 0.1
+MAXDETECTIONDIST = 0.05
 detect=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 braitenbergL=[-0.2,-0.4,-0.6,-0.8,-1,-1.2,-1.4,-1.6, 0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 braitenbergR=[-1.6,-1.4,-1.2,-1,-0.8,-0.6,-0.4,-0.2, 0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
