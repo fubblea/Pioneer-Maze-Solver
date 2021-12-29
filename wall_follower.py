@@ -62,7 +62,7 @@ returnCode, finishLine = sim.simxGetObjectHandle(
 returnCode, collisionState = sim.simxCheckCollision(clientID, entity1=robot, entity2=finishLine, operationMode=sim.simx_opmode_streaming)
 
 # Key Robot Parameters
-NODETECTIONDIST = 0.15
+NODETECTIONDIST = 0.13
 V0 = 1
 
 try:
@@ -78,11 +78,16 @@ try:
             sensorArray[i].updateValues(detectionState, detectedPoint, detectedObjectHandle, detectedSurfaceNormalVector)
 
         right = sensorArray[7].distance <= NODETECTIONDIST
-        front = (sensorArray[2].distance <= NODETECTIONDIST) or (sensorArray[3].distance <= NODETECTIONDIST) or (sensorArray[4].distance <= NODETECTIONDIST) or (sensorArray[5].distance <= NODETECTIONDIST)
+
+        front = ((sensorArray[1].distance <= NODETECTIONDIST*0.2) or (sensorArray[2].distance <= NODETECTIONDIST*0.7) 
+                    or (sensorArray[3].distance <= NODETECTIONDIST) or (sensorArray[4].distance <= NODETECTIONDIST) 
+                    or (sensorArray[5].distance <= NODETECTIONDIST*0.7) or (sensorArray[6].distance <= NODETECTIONDIST*0.2)
+                )
+
 
         if front == False and right == False:
             sim.simxSetJointTargetVelocity(clientID, jointHandle=leftMotor, targetVelocity=V0, operationMode=sim.simx_opmode_oneshot_wait)
-            sim.simxSetJointTargetVelocity(clientID, jointHandle=rightMotor, targetVelocity=V0/3, operationMode=sim.simx_opmode_oneshot_wait)
+            sim.simxSetJointTargetVelocity(clientID, jointHandle=rightMotor, targetVelocity=V0/4, operationMode=sim.simx_opmode_oneshot_wait)
             sim.simxAddStatusbarMessage(clientID, message="1", operationMode=sim.simx_opmode_oneshot_wait)
         
         elif front == True and right == False:
@@ -96,8 +101,8 @@ try:
             sim.simxAddStatusbarMessage(clientID, message="3", operationMode=sim.simx_opmode_oneshot_wait)
         
         elif front == True and right == True:
-            sim.simxSetJointTargetVelocity(clientID, jointHandle=leftMotor, targetVelocity=0, operationMode=sim.simx_opmode_oneshot_wait)
-            sim.simxSetJointTargetVelocity(clientID, jointHandle=rightMotor, targetVelocity=V0, operationMode=sim.simx_opmode_oneshot_wait)
+            sim.simxSetJointTargetVelocity(clientID, jointHandle=leftMotor, targetVelocity=-V0/2, operationMode=sim.simx_opmode_oneshot_wait)
+            sim.simxSetJointTargetVelocity(clientID, jointHandle=rightMotor, targetVelocity=V0/2, operationMode=sim.simx_opmode_oneshot_wait)
             sim.simxAddStatusbarMessage(clientID, message="4", operationMode=sim.simx_opmode_oneshot_wait)
         
         else:
